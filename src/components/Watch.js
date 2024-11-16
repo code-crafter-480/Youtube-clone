@@ -105,7 +105,10 @@ const Watch = () => {
                                     <h1 className={`font-medium text-lg w-full  ${singleVideo?.snippet?.channelTitle?.length > 18 ? 'block' : 'truncate'}`}>
                                         {singleVideo?.snippet?.channelTitle}
                                     </h1>
-                                    <div className='text-sm text-gray-600 text-xs ' >{subscriberCount} subscribers</div>
+                                    <div className='flex items-center'>
+                                        <div className='text-sm text-gray-600 text-sm ' >{subscriberCount} </div>
+                                        <div className='text-sm text-gray-600 text-sm '> &nbsp;&nbsp;subscribers</div>
+                                    </div>
                                 </div>
                             </div>
                             <button className='px-5 py-2 font-medium bg-black text-white rounded-full ml-3'>Subscribe</button>

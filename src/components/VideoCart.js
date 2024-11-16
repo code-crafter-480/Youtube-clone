@@ -68,7 +68,9 @@ const VideoCart = ({item}) => {
             <div className='ml-2'>
                 <h1 className='font-bold'>{item.snippet.title.length > 65 ? item.snippet.title.substring(0, 70) + "..." : item.snippet.title}</h1>
                 <p className='text-sm text-gray-600'>{item.snippet.channelTitle}</p>
-                <span className='text-sm text-gray-500'>{formatNumber(item.statistics.viewCount)} views • {timeAgo(item.snippet.publishedAt)} </span>
+                <span className='text-sm text-gray-500'>
+                    {item.statistics?.viewCount ? `${formatNumber(item.statistics.viewCount)} views •` : ""} {item.snippet?.publishedAt ? timeAgo(item.snippet.publishedAt) : "NO"} 
+                </span> 
             </div>
         </div>
       </div>
