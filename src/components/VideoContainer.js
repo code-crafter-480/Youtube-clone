@@ -44,7 +44,6 @@ const VideoContainer = () => {
     }
     // eslint-disable-next-line 
   },[category])
-  // console.log("video is : ", video)
 
   return (
     <div className='mt-5 grid grid-cols-3 gap-2'>
@@ -54,8 +53,6 @@ const VideoContainer = () => {
             <Link to={`/watch?v=${typeof item.id === 'object' ? item.id.videoId : item.id}`} key={index} >
               <VideoCart item={item} /> 
             </Link>
-            
-
           )
         })
       }

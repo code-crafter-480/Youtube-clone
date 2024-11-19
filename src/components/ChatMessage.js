@@ -1,16 +1,36 @@
 import React from 'react'
 import Avatar from 'react-avatar'
 
-const ChatMessage = ({item}) => {
+const localImages = [
+  require('../constant/images/03.jpg')
+];
+
+const getRandomLocalImage = () => {
+  const randomIndex = Math.floor(Math.random() * localImages.length);
+  return localImages[randomIndex];
+};
+
+const ChatMessage = ({ item }) => {
+
+  
+
   return (
-    
-    <div className='flex items-center'>
-        <div >
-          <Avatar src='https://st2.depositphotos.com/2703645/7303/v/450/depositphotos_73039841-stock-illustration-male-avatar-icon.jpg' size={27} round={true} className='cursor-pointer' />
-        </div>
-        <div className='flex items-center'>
-          <h1 className='ml-2 font-medium text-sm'>{item.name}</h1>
-          <p className='ml-2 py-2 text-sm '>{item.message}</p>
+
+    <div className="flex items-start mb-3 bg-gray-200 rounded-lg">
+      {/* Avatar Section */}
+      <div>
+        <Avatar
+          src={getRandomLocalImage()}
+          size={27}
+          round={true}
+          className="cursor-pointer"
+        />
+      </div>
+
+      {/* Chat Content Section */}
+      <div className="ml-3">
+        <span className="font-medium text-sm leading-tight">{item.name}</span>
+        <span className="text-sm mt-1">&nbsp;&nbsp;{item.message}</span>
       </div>
     </div>
 

@@ -7,7 +7,9 @@ const appSlice = createSlice({
         open:true,
         video:[],
         category:"All",
-        active: "All"  // Add the 'active' field to the state
+        active: "All",  // Add the 'active' field to the state
+        searchSuggession: [] ,
+        
     },
     reducers:{
         // action
@@ -22,9 +24,12 @@ const appSlice = createSlice({
         },
         setActive: (state, action) => {  // New action to set 'active'
             state.active = action.payload;
+        },
+        setSearchSuggession: (state, action) => {
+            state.searchSuggession = action.payload;
         }
     }
 })
 
-export const {toggleSidebar, setHomeVideo, setCategory, setActive} = appSlice.actions
+export const {toggleSidebar, setHomeVideo, setCategory, setActive,} = appSlice.actions
 export default appSlice.reducer

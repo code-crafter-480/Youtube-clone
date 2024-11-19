@@ -6,15 +6,7 @@ const buttonList = ["All", "Javascript", "Java", "Live", "Mixes","Game", "Movie"
 
 
 const ButtonList = () => {
-  // const [active, setActive] = useState("All")
-  // const dispatch = useDispatch()
-
-  // const videoByTag = (tag) => {
-  //   if(active !== tag){
-  //     dispatch(setCategory(tag))
-  //     setActive(tag)
-  //   }
-  // }
+  // 👉 Add in #05 
   const dispatch = useDispatch();
   const active = useSelector((state) => state.app.active);  // Access active from Redux store
 
@@ -27,7 +19,7 @@ const ButtonList = () => {
 
   return (
     // 👉 This 'no-scrollbar' is defined in 'index.css'
-    <div className='mt-3 flex w-full overflow-x-scroll no-scrollbar'>      
+    <div className=' flex w-[98%] overflow-x-scroll no-scrollbar bg-white shadow-lg shadow-gray-400/50 rounded-lg p-2 pr-2'>      
       {
         buttonList.map((item, index) => {
           return (

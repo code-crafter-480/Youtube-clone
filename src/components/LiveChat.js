@@ -3,7 +3,7 @@ import ChatMessage from './ChatMessage'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { setMessage } from '../utils/chatSlice'
-import {generateRandomName, generateRandomMessage} from '../utils/randomNameGenerator'
+import {generateRandomName, generateRandomMessage2} from '../utils/randomNameGenerator'
 
 const LiveChat = () => {
 
@@ -12,7 +12,7 @@ const LiveChat = () => {
 
     useEffect(() => {
         const timer = setInterval(() => {
-            dispatch(setMessage({ name:generateRandomName(), message: generateRandomMessage(7) }))
+            dispatch(setMessage({ name:generateRandomName(), message: generateRandomMessage2() }))
         }, 1000)
 
         return (() => {

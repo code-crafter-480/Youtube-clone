@@ -4,10 +4,16 @@ import VideoContainer from './VideoContainer'
 
 const Feed = () => {
   return (
-    <div className='ml-15 mr-5 ml-4 w-[85%]'>
-      <ButtonList />
-      <VideoContainer />
-    </div>
+    <div className="flex flex-col h-full ">
+    {/* Button list is fixed at the top */}
+      <div className="flex-shrink-0 mb-2 pb-3 ">
+        <ButtonList />
+      </div>
+      {/* Video container takes up the remaining space */}
+      <div className="flex-1 overflow-y-auto ">
+        <VideoContainer />
+      </div>
+  </div>
   )
 }
 

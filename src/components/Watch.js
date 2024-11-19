@@ -7,10 +7,11 @@ import { BiLike, BiDislike } from "react-icons/bi";
 import { PiShareFatLight } from "react-icons/pi";
 import { BsDownload } from "react-icons/bs";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import {  BsSend } from "react-icons/bs";
+import { BsSend } from "react-icons/bs";
 import LiveChat from './LiveChat'
 import { useDispatch } from 'react-redux'
 import { setMessage } from '../utils/chatSlice'
+import VideoDescription from './VideoDescription'
 
 
 
@@ -27,8 +28,8 @@ const Watch = () => {
         try {
             // console.log("Viddios is : ",videoId)
             const res = await axios.get(`https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=${videoId}&regionCode=IN&key=${API_KEY}`)
-            // console.log(res)
             setSingleVideo(res?.data?.items[0])
+            // console.log(res?.data?.items[0])
 
         } catch (error) {
             console.log("Error 1 is : ", error)
@@ -75,15 +76,39 @@ const Watch = () => {
 
     const sendMessage = () => {
         dispatch(setMessage({
-            name:"Patel Programmer",
+            name: "Patel Programmer",
             message: input
         }))
         setInput("")
     }
 
+    function timeAgo(uploadDate) {
+        const now = new Date();
+        const uploadTime = new Date(uploadDate);
+        const difference = now - uploadTime;
+        // console.log("differenc is : ",difference)
+
+        const seconds = Math.floor(difference / 1000);
+        const minutes = Math.floor(seconds / 60);
+        const hours = Math.floor(minutes / 60);
+        const days = Math.floor(hours / 24);
+        const weeks = Math.floor(days / 7);
+        const months = Math.floor(days / 30);
+        const years = Math.floor(days / 365);
+
+        if (years > 0) return `${years} year${years > 1 ? 's' : ''} ago`;
+        if (months > 0) return `${months} month${months > 1 ? 's' : ''} ago`;
+        if (weeks > 0) return `${weeks} week${weeks > 1 ? 's' : ''} ago`;
+        if (days > 0) return `${days} day${days > 1 ? 's' : ''} ago`;
+        if (hours > 0) return `${hours} hour${hours > 1 ? 's' : ''} ago`;
+        if (minutes > 0) return `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
+        return `${seconds} second${seconds !== 1 ? 's' : ''} ago`;
+    }
+
+
     return (
-        <div className='flex ml-4 w-[100%] '>
-            <div className='flex w-[90%]'>
+        <div className='flex ml-[3%] w-[90%] '>
+            <div className='flex w-full'>
                 <div>
                     {/* 👉 This 'iframe' is from official youtube -> share -> Embed */}
                     <iframe
@@ -133,11 +158,20 @@ const Watch = () => {
                             </div>
                         </div>
                     </div>
+
+                    <VideoDescription
+                        views={formatNumber(singleVideo?.statistics?.viewCount)}
+                        uploadTime={timeAgo(singleVideo?.snippet?.publishedAt)}
+                        description={singleVideo?.snippet?.description}
+                        hashtags={formatLikes(singleVideo?.snippet?.tags)}
+                        comments={formatNumber(singleVideo?.statistics?.commentCount)}
+                    />
                 </div>
+
                 <div className='w-[100%] border border-gray-300 ml-10 rounded-lg h-fit p-4'>
-                    <div className='flex justify-between items-center'>
-                        <h1>Top chat</h1>
-                        <BsThreeDotsVertical />
+                    <div className="flex justify-between items-center p-2 bg-gray-100 rounded-md shadow-sm">
+                        <h1 className="text-lg font-semibold text-gray-800 tracking-wide">Top Chat</h1>
+                        <BsThreeDotsVertical className="text-gray-600 hover:text-gray-800 cursor-pointer" />
                     </div>
                     <div className='overflow-y-auto h-[28rem] flex flex-col-reverse'>        {/* 'flex flex-col-reverse' er jonno text bottom theke insert hobe... */}
                         <LiveChat />
@@ -147,15 +181,14 @@ const Watch = () => {
                             <div>
                                 <Avatar src='https://st2.depositphotos.com/2703645/7303/v/450/depositphotos_73039841-stock-illustration-male-avatar-icon.jpg' size={35} round={true} className='cursor-pointer' />
                             </div>
-                            <input value={input} onChange={(e) => setInput(e.target.value)} className='border-b border-gray-300 outline-none ml-2' type="text" placeholder='Send message...'/>
+                            <input value={input} onChange={(e) => setInput(e.target.value)} className='border-b border-gray-300 outline-none ml-2' type="text" placeholder='Send message...' />
                             <div className='bg-gray-200 cursor-pointer p-2 rounded-xl ml-5'>
-                                < BsSend onClick={sendMessage} className='cursor-pointer' /> 
+                                < BsSend onClick={sendMessage} className='cursor-pointer' />
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            
         </div>
     )
 }
