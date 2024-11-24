@@ -10,11 +10,11 @@ import { createBrowserRouter, RouterProvider} from "react-router-dom"
 
 const appRouter = createBrowserRouter([
   {
-    path:"/",
+    path:"https://react-tube-deploy.netlify.app",
     element: <Body />,
     children:[
       {
-        path: "/",
+        path: "https://react-tube-deploy.netlify.app",
         element: <Feed />
       },
       {
